@@ -60,6 +60,36 @@ def _partition(data: List[Merchant], pivot: Merchant) \
             equal.append(element)
     return less, equal, greater
 
+def quick_select(data: List[Merchant]):
+    """
+    Performs a quick select and returns the median element.
+    :param data: The data that we want the median element of (a list)
+    :return: A Merchant element that is the median of the given data
+    """
+    if len(data) == 0:
+        return None
+    else:
+        pivot = data[0]
+        k = len(data) // 2
+        less, equal, greater = _partition(data, pivot)
+        m = len(less)
+        count = len(equal)
+        while k < m or k > m + count:
+            if k <= m:
+                temp_list = less
+                pivot = temp_list[0]
+                less, equal, greater = _partition(temp_list, pivot)
+                m = len(less)
+                count = len(equal)
+            else:
+                temp_list = greater
+                pivot = temp_list[0]
+                k = k - m - count
+                less, equal, greater = _partition(temp_list, pivot)
+                m = len(less)
+                count = len(equal)
+        return pivot
+
 def quick_sort(data: List[Merchant]) -> List[Merchant]:
     """
     Performs a quick sort and returns a newly sorted list
@@ -72,8 +102,6 @@ def quick_sort(data: List[Merchant]) -> List[Merchant]:
         pivot = data[0]
         less, equal, greater = _partition(data, pivot)
         return quick_sort(less) + equal + quick_sort(greater)
-
-
 
 def main() -> None:
     """
