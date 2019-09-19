@@ -104,6 +104,12 @@ def quick_sort(data: List[Merchant]) -> List[Merchant]:
         return quick_sort(less) + equal + quick_sort(greater)
 
 def sum_total_distance(opt_merchant: Merchant, data: List[Merchant]) -> int:
+    """
+    Finds sum of distances from the optimal location to every other merchant.
+    :param opt_merchant: The merchant with the optimal location
+    :param data: The data that contains the locations to compute the distance between
+    :return: An int that is the sum of the distances from the optimal location to every other merchant
+    """
     sum = 0
     for merchant in data:
         if merchant.name != opt_merchant.name:
