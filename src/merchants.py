@@ -103,6 +103,13 @@ def quick_sort(data: List[Merchant]) -> List[Merchant]:
         less, equal, greater = _partition(data, pivot)
         return quick_sort(less) + equal + quick_sort(greater)
 
+def sum_total_distance(opt_merchant: Merchant, data: List[Merchant]) -> int:
+    sum = 0
+    for merchant in data:
+        if merchant.name != opt_merchant.name:
+            sum = sum + abs(opt_merchant.loc - merchant.loc)
+    return sum
+
 def main() -> None:
     """
     The main function.
