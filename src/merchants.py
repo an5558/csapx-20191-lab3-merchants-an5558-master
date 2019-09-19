@@ -115,9 +115,31 @@ def main() -> None:
     The main function.
     :return: None
     """
-    merchants = read_merchants(sys.argv[1])
-    start = time.perf_counter()
-    sorted_merchants = quick_sort(merchants)
+    if sys.argv[0] == 'slow':
+        merchants = read_merchants(sys.argv[1])
+        start = time.perf_counter()
+        sorted_merchants = quick_sort(merchants)
+        print("Search type: " + sys.argv[0])
+        print("Number of merchants: " + str(len(sorted_merchants)))
+        print("Elapsed time: " + str(time.perf_counter() - start))
+        print("Optimal store location: Merchant(name='" + sorted_merchants[
+            len(sorted_merchants) // 2].name + "', location=" + str(
+            sorted_merchants[len(sorted_merchants) // 2].loc) + ")")
+        print("Sum of distances: " + str(
+            sum_total_distance(sorted_merchants[len(sorted_merchants) // 2], sorted_merchants)))
+    else:
+        merchants = read_merchants(sys.argv[1])
+        start = time.perf_counter()
+        median_merchant = quick_select(merchants)
+        if median_merchant is None:
+            print("No optimal location was found because there are no merchants.")
+        else:
+            print("Search type: " + sys.argv[0])
+            print("Number of merchants: " + str(len(merchants)))
+            print("Elapsed time: " + str(time.perf_counter() - start))
+            print("Optimal store location: Merchant(name='" + median_merchant.name + "', location=" + str(
+                median_merchant.loc) + ")")
+            print("Sum of distances: " + str(sum_total_distance(median_merchant, merchants)))
 
 if __name__ == '__main__':
     main()
