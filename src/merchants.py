@@ -142,7 +142,7 @@ def main() -> None:
         else:
             print("Search type: " + sys.argv[1])
             print("Number of merchants: " + str(len(merchants)))
-            print("Elapsed time: " + str(time.perf_counter() - start))
+            print("Elapsed time: " + str(time.perf_counter() - start) + "seconds")
             print("Optimal store location: Merchant(name='" + median_merchant.name + "', location=" + str(
                 median_merchant.loc) + ")")
             print("Sum of distances: " + str(sum_total_distance(median_merchant, merchants)))
